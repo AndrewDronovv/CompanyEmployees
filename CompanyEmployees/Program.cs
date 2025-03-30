@@ -1,5 +1,4 @@
 using CompanyEmployees.Extensions;
-using CompanyEmployees.Services;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
@@ -8,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
+
+builder.Services.ConfigureRepositoryManager();
 
 
 builder.Services.AddControllers();
@@ -39,3 +40,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+//36

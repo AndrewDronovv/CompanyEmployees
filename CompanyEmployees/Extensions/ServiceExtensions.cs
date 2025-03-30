@@ -1,4 +1,6 @@
-﻿using LoggingService;
+﻿using CompanyEmployees.Core.Domain.Repositories;
+using CompanyEmployees.Infrastructure.Persistence;
+using LoggingService;
 
 namespace CompanyEmployees.Extensions;
 
@@ -27,4 +29,7 @@ public static class ServiceExtensions
     {
         services.AddSingleton<ILoggerManager, LoggerManager>();
     }
+
+    public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+        services.AddScoped<IRepositoryManager, RepositoryManager>();
 }
