@@ -9,7 +9,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 
 builder.Services.ConfigureRepositoryManager();
-
+builder.Services.ConfigureServiceManager();
 
 builder.Services.AddControllers();
 
@@ -40,4 +40,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-//36

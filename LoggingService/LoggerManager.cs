@@ -5,7 +5,6 @@ namespace LoggingService;
 public class LoggerManager : ILoggerManager
 {
     private ILogger _logger;
-
     public LoggerManager(ILogger logger)
     {
         _logger = logger;
