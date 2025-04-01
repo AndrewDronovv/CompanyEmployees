@@ -1,5 +1,8 @@
-﻿namespace CompanyEmployees.Core.Services.Abstractions;
+﻿using Shared.DataTransferObjects;
 
-public class ICompanyService
+namespace CompanyEmployees.Core.Services.Abstractions;
+
+public interface ICompanyService
 {
+    IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges);
 }

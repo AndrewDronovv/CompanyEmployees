@@ -1,4 +1,5 @@
 using CompanyEmployees.Extensions;
+using LoggingService;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
@@ -7,12 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
-
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureSqlContext(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(CompanyEmployees.Infrastructure.Presentation.AssemblyReference).Assembly);
 
 builder.Host.UseSerilog((hostContext, configuration) =>
 {
@@ -21,9 +24,10 @@ builder.Host.UseSerilog((hostContext, configuration) =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
+
+if (app.Environment.IsProduction())
     app.UseHsts();
 
 app.UseHttpsRedirection();
@@ -40,3 +44,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//50
