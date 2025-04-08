@@ -1,5 +1,6 @@
 ﻿using CompanyEmployees.Core.Domain.Entities;
 using CompanyEmployees.Core.Domain.Repositories;
+using System.ComponentModel.Design;
 
 namespace CompanyEmployees.Infrastructure.Persistence.Repositories;
 
@@ -15,5 +16,5 @@ internal sealed class CompanyRepository : RepositoryBase<Company>, ICompanyRepos
             .ToList();
     public Company GetCompany(Guid companyId, bool trackChanges) =>
             FindByCondition(c => c.Id.Equals(companyId), trackChanges)
-            .SingleOrDefault()!;
+    .SingleOrDefault()!;
 }
